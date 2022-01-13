@@ -33,7 +33,7 @@ Sorry, but I need to keep using the free-version of GCP's Cloud Function so I'll
 
 How?
 - Python script fetches real-time, updated market data using Coingecko API
-- GCP Cloud Function is used to deploy the Python script as a HTTP request on the CLoud
+- GCP Cloud Function is used to deploy the Python script as a HTTP request on the Cloud
 - Apps Script is used to connect the 'button' on the metrics page with the Cloud Function
 - Google Spreadsheet is updated and macros are used to produce simple computations & visualizations!
 
