@@ -19,8 +19,30 @@ Portfolio tracker & market trends:
 
 There aren't that many features/visualizations implemented but hopefully there are more to come!
 
-
+## Read-only link
 link (read-only): https://docs.google.com/spreadsheets/d/1vUgqVLvMaFcxQUQKcKMMlpMCJ_azJD7v649y0OjEhME/edit?usp=sharing
-The spreadsheet is read-only as the u
+The spreadsheet is read-only so nothing will happen even if you click 'update'.
+Sorry, but I need to keep using the free-version of GCP's Cloud Function so I'll keep it to myself for now. 
+
+## Technologies
+- Python
+- Google Spreadsheet
+- Google Spreadsheet Apps Script
+- Coingecko API
+- GCP Cloud Function
+
+How?
+- Python script fetches real-time, updated market data using Coingecko API
+- GCP Cloud Function is used to deploy the Python script as a HTTP request on the CLoud
+- Apps Script is used to connect the 'button' on the metrics page with the Cloud Function
+- Google Spreadsheet is updated and macros are used to produce simple computations & visualizations!
+
+## Requirments
+- pandas
+- numpy
+- pycoingecko
+- datetime
+- gspread
+- oauth2client
 
 
