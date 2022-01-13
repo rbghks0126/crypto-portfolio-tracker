@@ -1,0 +1,9 @@
+# Function dependencies, for example:
+# package>=version
+
+pandas>=1.2.3
+numpy>=1.17.0
+pycoingecko
+datetime
+gspread
+oauth2client
