@@ -1,6 +1,6 @@
 # crypto-realtime-tracker
 
-This is a real-time (if you click update) Crypto market / portfolio tracker that I built for my personal investment in cryptocurrencies.
+This is a Crypto market / portfolio tracker that I built to aid my personal investment in cryptocurrencies.
 
 ## Features
 By clicking the 'UPDATE' button, various real-time metrics for the 70 tokens that I am interested in are fetched and visualized.
