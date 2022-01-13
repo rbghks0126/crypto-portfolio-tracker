@@ -11,10 +11,13 @@ The point is to identify easily coins that have shot up or coins that still seem
 On a separate sheet are some basic visualizations of my portfolio and market conditions.
 
 ## Examples
+Metrics spreadsheet:
 ![Real-time metrics page](images/metrics.PNG)
 
+Portfolio tracker & market trends:
 ![Portfolio tracker](images/dashboard.PNG)
 
+There aren't that many features/visualizations implemented but hopefully there are more to come!
 
 
 link (read-only): https://docs.google.com/spreadsheets/d/1vUgqVLvMaFcxQUQKcKMMlpMCJ_azJD7v649y0OjEhME/edit?usp=sharing
