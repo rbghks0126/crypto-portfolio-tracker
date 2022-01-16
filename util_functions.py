@@ -132,3 +132,38 @@ def calc_days_from_ath(df):
     df.drop('ATH_date', 1, inplace=True)
 
     return df
+
+
+def get_row(p_element):
+    from datetime import datetime
+    from selenium.webdriver.common.by import By
+
+    protocols = p_element[1]
+    protocols = protocols.find_elements(By.CLASS_NAME,
+                                        'smart-asset-grid__item__header')
+    summary = [protocol.text.split('\n') for protocol in protocols]
+    protocol = [row[0] for row in summary]
+    price = [row[-1][1:] for row in summary]
+
+    today = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    out_dict = dict()
+    out_dict['total'] = sum([float(item) for item in price])
+    out_dict['date'] = today
+    for col, val in zip(protocol, price):
+        out_dict[col] = val
+    return out_dict
+
+
+def insert_row(row, df):
+    from datetime import datetime
+
+    if df.empty:
+        df = pd.DataFrame()
+        df = df.append(row, ignore_index=True)
+        return df
+    else:
+        today = datetime.now().strftime("%Y-%m-%d")
+        latest_date = df['date'].max()[:10]
+        if today > latest_date:
+            df = df.append(row, ignore_index=True)
+        return df

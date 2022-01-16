@@ -1,13 +1,10 @@
-def gsheet_coin_tracker():
+import util_functions
+import gsheet_functions
 
+
+def update_target_list():
     import pandas as pd
-    import numpy as np
     from pycoingecko import CoinGeckoAPI
-    from datetime import datetime
-    import gspread
-
-    import util_functions
-    import gsheet_functions
 
     # 70 tokens from cryptobanter's youtube video
     target_tokens_list = ['btc', 'eth', 'sol', 'ada', 'luna', 'dot', 'avax', 'matic', 'algo',
@@ -109,12 +106,48 @@ def gsheet_coin_tracker():
     df_merge.sort_values(by='rank', inplace=True)
     df_merge.set_index('rank', inplace=True)
 
-    gsheet_instance, df_gsheet = gsheet_functions.get_gsheet_df(
+    # get target_list sheet
+    gsheet_instance_main, df_gsheet = gsheet_functions.get_gsheet_df(
         'gsheet_coin_tracker', 0)
-    update_info = [row.tolist()
-                   for i, row in df_merge.reset_index().iterrows()]
+    update_info_main = [row.tolist()
+                        for i, row in df_merge.reset_index().iterrows()]
+    # update gsheet target_list
+    gsheet_functions.update_gsheet(
+        gsheet_instance_main, update_info_main, 'A2:J71')
 
-    # update gsheet!
-    gsheet_functions.update_gsheet(gsheet_instance, update_info, 'A2:J71')
+    return '200'
 
+
+def update_farming():
+    import sel_scraper
+    from datetime import datetime
+    # scrape stake wallet balance from zapper
+    url = 'https://zapper.fi/account/0x2638d7d069ee603dc8838ee6710c8e94e130265f'
+    sleep_time = 2
+    p_element, driver = sel_scraper.get_staking_element(url, sleep_time)
+
+    # get farming sheet instance
+    gsheet_instance_farming, df_farming = gsheet_functions.get_gsheet_df(
+        'gsheet_coin_tracker', 2)
+
+    row = util_functions.get_row(p_element)
+    driver.quit()
+    df_farming = util_functions.insert_row(row, df_farming)
+    df_farming = df_farming.set_index('total')
+
+    farming_update_info = [row.tolist()
+                           for i, row in df_farming.reset_index().iterrows()]
+
+    end_letter = chr(ord('B') + (df_farming.shape[1]) - 1)
+
+    gsheet_functions.update_gsheet(gsheet_instance_farming,
+                                   farming_update_info,
+                                   f'A2:{end_letter}{df_farming.shape[0]+1}')
+
+    # today = datetime.now().strftime("%Y-%m/%d, %H:%M:%S")
+    # latest_date = df_farming.date.max()
+    # if today > latest_date:
+    #     gsheet_functions.update_gsheet(gsheet_instance_farming,
+    #                                    [datetime.now()],
+    #                                    f'K2:K2')
     return '200'
