@@ -110,11 +110,11 @@ def gsheet_coin_tracker():
     df_merge.set_index('rank', inplace=True)
 
     gsheet_instance, df_gsheet = gsheet_functions.get_gsheet_df(
-        'gsheet_coin_tracker')
+        'gsheet_coin_tracker', 0)
     update_info = [row.tolist()
                    for i, row in df_merge.reset_index().iterrows()]
 
     # update gsheet!
-    gsheet_functions.update_gsheet(gsheet_instance, update_info)
+    gsheet_functions.update_gsheet(gsheet_instance, update_info, 'A2:J71')
 
     return '200'

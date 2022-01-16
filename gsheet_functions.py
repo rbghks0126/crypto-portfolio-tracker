@@ -3,7 +3,7 @@ import gspread
 import pandas as pd
 
 
-def get_gsheet_df(sheet_name):
+def get_gsheet_df(sheet_name, index):
     # define the scope
     scope = ['https://spreadsheets.google.com/feeds',
              'https://www.googleapis.com/auth/drive']
@@ -16,7 +16,7 @@ def get_gsheet_df(sheet_name):
     client = gspread.authorize(creds)
 
     sheet = client.open(sheet_name)
-    gsheet_instance = sheet.get_worksheet(0)
+    gsheet_instance = sheet.get_worksheet(index)
 
     # get all the records of the data
     records_data = gsheet_instance.get_all_records()
@@ -24,8 +24,8 @@ def get_gsheet_df(sheet_name):
     return gsheet_instance, records_df
 
 
-def update_gsheet(gsheet_instance, update_info):
+def update_gsheet(gsheet_instance, update_info, update_range):
     gsheet_instance.batch_update([{
-        'range': 'A2:J71',
+        'range': update_range,
         'values': update_info,
     }])
