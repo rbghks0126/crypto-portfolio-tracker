@@ -1,4 +1,4 @@
-# crypto-realtime-tracker
+# crypto-portfolio-tracker
 
 This is a Crypto market / portfolio tracker that I built to aid my personal investment journey in cryptocurrencies.
 
