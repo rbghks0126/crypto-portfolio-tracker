@@ -19,11 +19,6 @@ Portfolio tracker & market trends:
 
 There aren't that many features/visualizations implemented but hopefully there are more to come!
 
-## Read-only link
-link (read-only): https://docs.google.com/spreadsheets/d/1vUgqVLvMaFcxQUQKcKMMlpMCJ_azJD7v649y0OjEhME/edit?usp=sharing
-The spreadsheet is read-only so nothing will happen even if you click 'update'.
-Sorry, but I need to keep using the free-version of GCP's Cloud Function so I'll keep it to myself for now. 
-
 ## Technologies
 - Python
 - Google Spreadsheet
